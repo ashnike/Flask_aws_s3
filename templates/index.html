@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS S3 file upload</title>
+</head>
+<body>
+    <h1>File Upload</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <button type="submit">Upload</button>
+    </form>
+    <h2>Files in S3 Bucket:</h2>
+    <ul>
+        {% for file in files %}
+            <li>{{ file }} <form action="/delete" method="post"><input type="hidden" name="file_name" value="{{ file }}"><button type="submit">Delete</button></form></li>
+        {% endfor %}
+    </ul>
+    {% if not files %}
+        <p>No files present in the bucket.</p>
+    {% endif %}
+</body>
+</html>
